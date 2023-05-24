@@ -65,10 +65,10 @@ public class ContestantController {
 //    }
 
     @GetMapping("/adminDashboard")
-    public String adminDashboard(@RequestParam("missid") long missid, @RequestParam(defaultValue = "0") int page, Model model) {
-        int pageSize = 2; // set the number of items to display per page
+    public String adminDashboard(@RequestParam("missid") long missid, @RequestParam(defaultValue = "1") int page, Model model) {
+        int pageSize = 5;
 
-        Pageable pageable = PageRequest.of(page, pageSize); // create a PageRequest object
+        Pageable pageable = PageRequest.of(page - 1, pageSize); // adjust the page number
 
         Page<Contestants> contestantsPage = contestantService.findAllContestants(pageable); // get a page of contestants
 
@@ -98,10 +98,33 @@ public class ContestantController {
         return"U_dashboard";
     }
 
+//    @GetMapping("/adminDashboard/search")
+//    public String adminSearchCont(@RequestParam(value ="country") String country, Model model){
+//        List<Contestants> persons = contestantService.searchCont(country);
+//        model.addAttribute("persons",persons);
+//        return "Dashboard";
+//    }
+
     @GetMapping("/adminDashboard/search")
-    public String adminSearchCont(@RequestParam(value ="country") String country, Model model){
-        List<Contestants> persons = contestantService.searchCont(country);
-        model.addAttribute("persons",persons);
+    public String adminSearchCont(@RequestParam(value ="country") String country,
+                                  @RequestParam("missid") long missid,
+                                  @RequestParam(defaultValue = "1") int page,
+                                  Model model) {
+        int pageSize = 5; // set the number of items to display per page
+
+        Pageable pageable = PageRequest.of(page - 1, pageSize); // adjust the page number to 0-based index
+
+        Page<Contestants> contestantsPage = contestantService.searchContWithPagination(country, pageable); // perform search with pagination
+
+        List<Contestants> contestantsList = contestantsPage.getContent(); // get the list of contestants from the page
+        int totalPages = contestantsPage.getTotalPages(); // get the total number of pages
+
+        model.addAttribute("missid", missid);
+        model.addAttribute("persons", contestantsList);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("currentPage", page);
+
         return "Dashboard";
     }
+
 }

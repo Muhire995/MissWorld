@@ -19,11 +19,11 @@ public class Votes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long vote_id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "userId", nullable = false, unique = true)
     private Users userId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "contestants_id", nullable = false)
     private Contestants contestant_id;
 

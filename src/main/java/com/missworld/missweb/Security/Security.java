@@ -21,9 +21,9 @@
 //                        .loginPage("/loginUser")
 //                        .usernameParameter("email")
 //                        .permitAll()
-//                        //.defaultSuccessUrl("/dashBoard")
-//                       // .loginProcessingUrl("/loginUser")
-//                       // .failureUrl("/loginUser?error=true")
+//                        .defaultSuccessUrl("/dashBoard")
+//                        .loginProcessingUrl("/loginUser")
+////                        .failureUrl("/loginUser?error=true")
 //                )
 //                .logout(logout -> logout
 //                                  .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll());

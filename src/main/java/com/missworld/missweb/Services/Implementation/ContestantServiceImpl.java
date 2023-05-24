@@ -96,5 +96,11 @@ public class ContestantServiceImpl implements ContestantService {
         return contestantRepository.findAll(pageable);
     }
 
+    @Override
+    public Page<Contestants> searchContWithPagination(String country, Pageable pageable) {
+        return contestantRepository.findByCountry(country, pageable);
+    }
+
+
 
 }

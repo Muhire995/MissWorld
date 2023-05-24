@@ -19,4 +19,6 @@ public interface ContestantService {
     List<Contestants> searchCont(String country);
 
     Page<Contestants> findAllContestants(Pageable pageable);
+
+    Page<Contestants> searchContWithPagination(String country, Pageable pageable);
 }

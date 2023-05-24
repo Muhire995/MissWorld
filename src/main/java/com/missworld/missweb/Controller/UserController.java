@@ -29,7 +29,7 @@ public class UserController {
 
     @GetMapping("/loginUser")
     public String login(Model model){
-        return "login";
+        return "loginUser";
     }
 
     @PostMapping("/loginUser")

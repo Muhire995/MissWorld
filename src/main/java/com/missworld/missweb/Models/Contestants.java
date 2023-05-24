@@ -20,7 +20,7 @@ public class Contestants {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long contestant_id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "userId", nullable = false)
     private Users userId;
 
